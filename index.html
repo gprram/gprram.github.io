@@ -1,0 +1,793 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>G. Raghu Ram Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: lab-bench portfolio. Hero pairs the name with a live 2-joint robot arm (inverse kinematics) on a drafting grid;
+   sections alternate paper and panel tones, with a line-follower demo in Projects. */
+:root {
+  --bg: #eef2ef;
+  --bg2: #e1e9e4;
+  --card: #f8faf8;
+  --fg: #0c1e24;
+  --muted: #475d64;
+  --line: rgba(12, 30, 36, 0.18);
+  --grid: rgba(12, 30, 36, 0.07);
+  --amber: #9a5100;
+  --amber-fill: #e59a1f;
+  --teal: #00776e;
+  --teal-fill: #2fb7ae;
+  --on-accent: #0c1e24;
+  --f-display: 'Chakra Petch', 'Segoe UI', system-ui, sans-serif;
+  --f-body: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --f-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #07141a; --bg2: #0b1d25; --card: #0e2129; --fg: #e5f1ee; --muted: #93adb1;
+    --line: rgba(229, 241, 238, 0.17); --grid: rgba(229, 241, 238, 0.06);
+    --amber: #f2b134; --amber-fill: #f2b134; --teal: #3fd0c9; --teal-fill: #3fd0c9; --on-accent: #07141a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #07141a; --bg2: #0b1d25; --card: #0e2129; --fg: #e5f1ee; --muted: #93adb1;
+  --line: rgba(229, 241, 238, 0.17); --grid: rgba(229, 241, 238, 0.06);
+  --amber: #f2b134; --amber-fill: #f2b134; --teal: #3fd0c9; --teal-fill: #3fd0c9; --on-accent: #07141a;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 96px; }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 16px; line-height: 1.65; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 12; background: var(--bg); }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.08; margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+.wrap { width: 100%; max-width: 1180px; margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.mono { font-family: var(--f-mono); }
+.eyebrow { font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--amber); display: inline-flex; align-items: center; gap: 10px; }
+.eyebrow::before { content: ""; width: 10px; height: 10px; background: var(--amber-fill); display: inline-block; }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 11; background: var(--bg); border-bottom: 1px solid var(--line); }
+.top .wrap { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 20px; padding-block: 10px; }
+.brand { font-family: var(--f-mono); font-weight: 500; font-size: 0.95rem; text-decoration: none; display: inline-flex; gap: 8px; align-items: center; }
+.brand b { background: var(--amber-fill); color: var(--on-accent); padding: 1px 7px; font-weight: 500; }
+.tbtn { margin-left: auto; font-family: var(--f-mono); font-size: 0.78rem; background: transparent; color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
+.tbtn:hover { border-color: var(--amber); }
+.nav { display: flex; gap: 2px; overflow-x: auto; width: 100%; order: 3; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav a { font-family: var(--f-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; padding: 8px 10px; color: var(--muted); white-space: nowrap; border-bottom: 2px solid transparent; }
+.nav a:hover { color: var(--fg); border-bottom-color: var(--amber-fill); }
+@media (min-width: 820px) {
+  .nav { order: 0; width: auto; margin-left: auto; }
+  .tbtn { margin-left: 0; }
+}
+
+/* hero */
+.hero { background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px); background-size: 32px 32px; border-bottom: 1px solid var(--line); }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: 44px; align-items: center; padding-block: 56px 52px; }
+@media (max-width: 880px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); gap: 32px; padding-block: 36px 40px; } }
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+h1 { font-size: clamp(2.7rem, 8vw, 5.2rem); font-weight: 700; letter-spacing: -0.025em; }
+h1 span { color: var(--amber); }
+.lead { font-size: clamp(1.05rem, 2.2vw, 1.25rem); color: var(--muted); max-width: 34em; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { font-family: var(--f-mono); font-size: 0.78rem; border: 1px solid var(--line); background: var(--card); padding: 4px 11px; border-radius: 999px; }
+.chip.live::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--teal-fill); margin-right: 8px; animation: pulse 1.8s ease-in-out infinite; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { font-family: var(--f-mono); font-size: 0.9rem; font-weight: 500; text-decoration: none; padding: 12px 20px; border: 1px solid var(--fg); border-radius: 6px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; background: transparent; color: var(--fg); transition: transform 0.18s ease, background 0.18s ease; }
+.btn:hover { transform: translateY(-2px); }
+.btn.solid { background: var(--amber-fill); border-color: var(--amber-fill); color: var(--on-accent); }
+.btn.solid:hover { background: var(--teal-fill); border-color: var(--teal-fill); }
+
+.panel { border: 1px solid var(--line); background: var(--card); border-radius: 10px; overflow: hidden; min-width: 0; }
+.panel-head { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 10px 14px; border-bottom: 1px solid var(--line); font-family: var(--f-mono); font-size: 0.74rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.panel canvas { display: block; width: 100%; aspect-ratio: 5 / 4; cursor: crosshair; touch-action: pan-y; }
+.readout { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: 1px solid var(--line); }
+.readout div { padding: 10px 14px; border-right: 1px solid var(--line); font-family: var(--f-mono); font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.readout div:last-child { border-right: 0; }
+.readout b { display: block; font-size: 1.05rem; color: var(--fg); font-weight: 500; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.hint { padding: 8px 14px; border-top: 1px solid var(--line); font-family: var(--f-mono); font-size: 0.72rem; color: var(--muted); }
+
+/* tech strip */
+.strip { overflow: hidden; background: var(--bg2); border-bottom: 1px solid var(--line); }
+.strip-track { display: flex; width: max-content; animation: slide 40s linear infinite; }
+.strip:hover .strip-track { animation-play-state: paused; }
+.strip-list { display: flex; gap: 36px; padding: 14px 36px 14px 0; font-family: var(--f-mono); font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
+.strip-list span::before { content: "+"; color: var(--amber); margin-right: 36px; }
+
+/* sections */
+.sec { padding-block: 76px; }
+.sec.alt { background: var(--bg2); border-block: 1px solid var(--line); }
+.sec-head { display: grid; gap: 12px; max-width: 680px; margin-bottom: 40px; }
+h2 { font-size: clamp(1.9rem, 4.6vw, 3rem); font-weight: 700; }
+.sec-head p { color: var(--muted); }
+.split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+@media (max-width: 880px) { .split { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
+.prose { display: grid; gap: 16px; max-width: 34em; min-width: 0; }
+.facts { border: 1px solid var(--line); background: var(--card); border-radius: 10px; margin: 0; padding: 6px 20px; min-width: 0; }
+.facts div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 12px; padding: 13px 0; border-bottom: 1px solid var(--line); }
+.facts div:last-child { border-bottom: 0; }
+.facts dt { font-family: var(--f-mono); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding-top: 3px; }
+.facts dd { margin: 0; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 0; margin-top: 44px; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--card); }
+.stat { padding: 22px 20px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); margin: 0 -1px -1px 0; }
+.stat b { display: block; font-family: var(--f-display); font-size: 2.4rem; line-height: 1; color: var(--teal); font-variant-numeric: tabular-nums; }
+.stat span { font-family: var(--f-mono); font-size: 0.76rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.card { border: 1px solid var(--line); background: var(--card); border-radius: 10px; padding: 24px; display: grid; gap: 12px; align-content: start; min-width: 0; transition: transform 0.2s ease, border-color 0.2s ease; }
+.card:hover { transform: translateY(-4px); border-color: var(--amber); }
+.card svg { width: 52px; height: 52px; color: var(--teal); }
+.card:hover svg .pop { animation: pop 0.6s ease; }
+.card h3 { font-size: 1.3rem; }
+.card p { color: var(--muted); font-size: 0.95rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-family: var(--f-mono); font-size: 0.72rem; border: 1px solid var(--line); padding: 2px 9px; border-radius: 999px; color: var(--muted); }
+
+/* lab scenes */
+.shots { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 18px; }
+.shot { margin: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: var(--card); min-width: 0; }
+.shot svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.shot figcaption { display: flex; justify-content: space-between; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--line); font-size: 0.9rem; }
+.shot figcaption span:last-child { font-family: var(--f-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); white-space: nowrap; }
+.s-line { fill: none; stroke: var(--fg); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.s-bg { fill: var(--bg2); }
+.s-card { fill: var(--card); }
+.s-teal { fill: var(--teal-fill); stroke: var(--fg); stroke-width: 2.5; stroke-linejoin: round; }
+.s-amber { fill: var(--amber-fill); stroke: var(--fg); stroke-width: 2.5; stroke-linejoin: round; }
+.s-ink { fill: var(--fg); }
+.s-link { fill: none; stroke: var(--teal-fill); stroke-width: 12; stroke-linecap: round; }
+.s-linebg { fill: none; stroke: var(--fg); stroke-width: 17; stroke-linecap: round; }
+.s-text { fill: var(--muted); font-family: var(--f-mono); font-size: 11px; }
+.s-code { fill: var(--teal-fill); opacity: 0.85; }
+.sway { transform-origin: 160px 80px; animation: sway 3.6s ease-in-out infinite; }
+.blink { animation: pulse 1.4s ease-in-out infinite; }
+.sweep { transform-origin: 240px 104px; animation: spin 2.6s linear infinite; }
+.wheel { animation: spin 2.2s linear infinite; }
+.wheel.w1 { transform-origin: 140px 180px; }
+.wheel.w2 { transform-origin: 250px 180px; }
+.ground { stroke: var(--fg); stroke-width: 2.5; stroke-dasharray: 14 12; animation: dash 0.9s linear infinite; }
+.ping { animation: ping 1.8s ease-out infinite; }
+.ping.p2 { animation-delay: 0.45s; }
+.ping.p3 { animation-delay: 0.9s; }
+
+/* projects */
+.proj { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 44px; align-items: start; }
+@media (max-width: 880px) { .proj { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+.proj .panel canvas { aspect-ratio: 16 / 10; cursor: default; }
+.proj-list { display: grid; min-width: 0; }
+.item { padding: 22px 0; border-top: 1px solid var(--line); display: grid; gap: 10px; }
+.item:first-child { border-top: 0; padding-top: 0; }
+.item h3 { font-size: 1.3rem; display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.item h3 small { font-family: var(--f-mono); font-size: 0.74rem; font-weight: 400; color: var(--amber); letter-spacing: 0.08em; white-space: nowrap; }
+.item p { color: var(--muted); }
+
+/* skills */
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 14px 56px; }
+.skill { display: grid; gap: 8px; }
+.skill div { display: flex; justify-content: space-between; gap: 12px; font-size: 0.97rem; }
+.skill div span { font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); }
+.gauge { position: relative; height: 10px; background: repeating-linear-gradient(90deg, var(--line) 0 calc(10% - 3px), transparent calc(10% - 3px) 10%); }
+.gauge::after { content: ""; position: absolute; inset: 0 auto 0 0; width: calc(var(--v) * 10%); background: repeating-linear-gradient(90deg, var(--teal-fill) 0 calc(100% / var(--v) - 3px), transparent calc(100% / var(--v) - 3px) calc(100% / var(--v))); }
+
+/* journey */
+.path { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-width: 760px; border-left: 2px solid var(--line); margin-left: 6px; }
+.path li { position: relative; padding: 0 0 34px 30px; display: grid; gap: 4px; }
+.path li:last-child { padding-bottom: 0; }
+.path li::before { content: ""; position: absolute; left: -8px; top: 6px; width: 14px; height: 14px; background: var(--amber-fill); border: 3px solid var(--bg2); border-radius: 50%; box-shadow: 0 0 0 1px var(--amber); }
+.path time { font-family: var(--f-mono); font-size: 0.8rem; letter-spacing: 0.1em; color: var(--amber); }
+.path h3 { font-size: 1.25rem; }
+.path p { color: var(--muted); }
+
+/* contact */
+.contact { display: grid; gap: 28px; max-width: 760px; }
+.contact h2 { font-size: clamp(2.2rem, 6.4vw, 4.2rem); }
+.mail { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.mail code { font-family: var(--f-mono); font-size: clamp(1rem, 3.6vw, 1.35rem); border: 1px dashed var(--amber); padding: 10px 16px; border-radius: 6px; overflow-wrap: anywhere; user-select: all; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.links a { font-family: var(--f-mono); font-size: 0.85rem; text-decoration: none; border: 1px solid var(--line); padding: 8px 16px; border-radius: 999px; background: var(--card); transition: border-color 0.2s ease, transform 0.2s ease; }
+.links a:hover { border-color: var(--amber); transform: translateY(-2px); }
+footer { border-top: 1px solid var(--line); padding-block: 26px; font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+@keyframes slide { to { transform: translateX(-50%); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes sway { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(6deg); } }
+@keyframes dash { to { stroke-dashoffset: -26; } }
+@keyframes ping { 0% { opacity: 0.9; } 100% { opacity: 0; transform: translateX(12px); } }
+@keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.35); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top"><b>GRR</b><span>G. Raghu Ram</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#teaching">Teaching</a>
+      <a href="#lab">Lab</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#journey">Journey</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="tbtn" id="themeBtn" type="button" aria-label="Switch between light and dark theme">Light / Dark</button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Coding · Robotics · AI Trainer</span>
+        <h1>G. Raghu <span>Ram</span></h1>
+        <!-- EDIT: tagline -->
+        <p class="lead">I teach students and teams to build robots that move, sense and think, from the first blinking LED to a working AI model.</p>
+        <div class="chips">
+          <span class="chip">B.Tech</span>
+          <span class="chip">Robotics lab trainer</span>
+          <span class="chip live">Open for workshops</span>
+        </div>
+        <div class="ctas">
+          <a class="btn solid" href="#projects">See my work →</a>
+          <a class="btn" href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="panel" aria-label="Live robot arm demo that follows your cursor">
+        <div class="panel-head"><span>ARM-2DOF · inverse kinematics</span><span>live</span></div>
+        <canvas id="armCanvas" role="img" aria-label="A two-joint robotic arm reaching toward a moving target"></canvas>
+        <div class="readout">
+          <div>θ1<b id="rdT1">0°</b></div>
+          <div>θ2<b id="rdT2">0°</b></div>
+          <div>X<b id="rdX">0</b></div>
+          <div>Y<b id="rdY">0</b></div>
+        </div>
+        <div class="hint">Move your cursor over the arm and it will reach for it.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <div class="strip-list"><span>Arduino</span><span>ESP32</span><span>Raspberry Pi</span><span>Python</span><span>OpenCV</span><span>ROS</span><span>TinyML</span><span>Servos &amp; steppers</span><span>LiDAR</span><span>Sensor fusion</span><span>3D printing</span><span>C++</span></div>
+      <div class="strip-list"><span>Arduino</span><span>ESP32</span><span>Raspberry Pi</span><span>Python</span><span>OpenCV</span><span>ROS</span><span>TinyML</span><span>Servos &amp; steppers</span><span>LiDAR</span><span>Sensor fusion</span><span>3D printing</span><span>C++</span></div>
+    </div>
+  </div>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">About</span>
+        <h2>Learning is better when something moves.</h2>
+      </div>
+      <div class="split">
+        <!-- EDIT: about text -->
+        <div class="prose">
+          <p>I am G. Raghu Ram, a B.Tech graduate who trains learners in coding, robotics and artificial intelligence. My classes are built around a simple idea: every concept should end with something you can hold, run or watch drive across the table.</p>
+          <p>I work with school students, college teams and beginners from other fields. We start with sensors and motors, move into Python and logic, and finish with projects that use computer vision and machine learning.</p>
+          <p>Add a few lines here about your teaching approach, the institutions you have worked with and what makes your sessions different.</p>
+        </div>
+        <dl class="facts">
+          <div><dt>Name</dt><dd>G. Raghu Ram</dd></div>
+          <div><dt>Education</dt><dd>B.Tech</dd></div>
+          <div><dt>Role</dt><dd>Coding, Robotics &amp; AI Trainer</dd></div>
+          <div><dt>Teaches</dt><dd>Arduino, Python, AI basics, IoT</dd></div>
+          <div><dt>Languages</dt><dd>English, Telugu, Hindi</dd></div>
+        </dl>
+      </div>
+      <!-- EDIT: sample numbers, replace with your own -->
+      <div class="stats">
+        <div class="stat"><b>250+</b><span>Students trained</span></div>
+        <div class="stat"><b>40+</b><span>Workshops run</span></div>
+        <div class="stat"><b>15+</b><span>Robot builds</span></div>
+        <div class="stat"><b>5+</b><span>Years teaching</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="teaching">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Teaching tracks</span>
+        <h2>What I teach</h2>
+        <p>Each track is hands-on, with a build at the end of every module.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="11" y="16" width="30" height="24" rx="4"/><circle class="pop" cx="20" cy="27" r="3.5"/><circle class="pop" cx="32" cy="27" r="3.5"/><path d="M19 34h14M26 16V9"/><circle cx="26" cy="7" r="2.5"/><path d="M6 25v6M46 25v6"/></svg>
+          <h3>Robotics with Arduino</h3>
+          <p>Motors, sensors and control. Students build and tune obstacle avoiders and line followers.</p>
+          <div class="tags"><span class="tag">Arduino</span><span class="tag">Sensors</span><span class="tag">Motors</span></div>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path class="pop" d="M17 16L7 26l10 10M35 16l10 10-10 10M29 11l-6 30"/></svg>
+          <h3>Python &amp; Coding</h3>
+          <p>Logic, loops and functions taught through small programs that control real hardware.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">C++</span><span class="tag">Logic</span></div>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="14" r="3.5"/><circle cx="9" cy="38" r="3.5"/><circle class="pop" cx="26" cy="10" r="3.5"/><circle class="pop" cx="26" cy="26" r="3.5"/><circle class="pop" cx="26" cy="42" r="3.5"/><circle cx="43" cy="26" r="3.5"/><path d="M12 14l11-4M12 14l11 12M12 38l11-12M12 38l11 4M29 10l11 16M29 26h11M29 42l11-16"/></svg>
+          <h3>AI &amp; Machine Learning</h3>
+          <p>Computer vision and small models that run on a Raspberry Pi or a microcontroller.</p>
+          <div class="tags"><span class="tag">OpenCV</span><span class="tag">TinyML</span><span class="tag">Models</span></div>
+        </article>
+        <article class="card">
+          <svg viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="16" y="22" width="20" height="20" rx="3"/><path d="M21 22v-5M26 22v-5M31 22v-5M21 42v5M26 42v5M31 42v5M16 28h-5M16 34h-5M36 28h5M36 34h5"/><path class="pop" d="M17 10a13 13 0 0118 0M21 14a7 7 0 0110 0"/></svg>
+          <h3>IoT &amp; Automation</h3>
+          <p>Connected devices with ESP32, dashboards and home or lab automation projects.</p>
+          <div class="tags"><span class="tag">ESP32</span><span class="tag">MQTT</span><span class="tag">Automation</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="lab">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">In the lab</span>
+        <h2>Where the learning happens</h2>
+        <p>Benches, boards and robots. Sessions are small so everyone gets time on the hardware.</p>
+      </div>
+      <div class="shots">
+        <!-- Scene A: classroom -->
+        <figure class="shot">
+          <svg viewBox="0 0 400 260" role="img" aria-label="Illustration of a trainer teaching two students at a bench with a small robot">
+            <rect class="s-bg" width="400" height="260"/>
+            <rect class="s-card s-line" x="28" y="26" width="196" height="108" rx="6"/>
+            <rect class="s-code" x="44" y="44" width="92" height="7" rx="3"/>
+            <rect class="s-code" x="52" y="58" width="116" height="7" rx="3"/>
+            <rect class="s-code" x="52" y="72" width="70" height="7" rx="3"/>
+            <rect class="s-code" x="44" y="86" width="104" height="7" rx="3"/>
+            <rect class="s-code" x="44" y="100" width="56" height="7" rx="3"/>
+            <circle class="s-line" cx="188" cy="92" r="17"/><path class="s-line" d="M188 75v-8M188 109v8M171 92h-8M205 92h8"/>
+            <circle class="s-amber" cx="188" cy="92" r="5"/>
+            <circle class="s-card s-line" cx="304" cy="82" r="15"/>
+            <path class="s-line" d="M304 97v62M304 160l-13 50M304 160l13 50M304 110l-52-14M304 112l20 28"/>
+            <path class="s-line" d="M0 214h400"/>
+            <path class="s-line" d="M44 172h216M58 172v42M246 172v42"/>
+            <rect class="s-teal" x="120" y="142" width="66" height="30" rx="6"/>
+            <circle class="s-card" cx="140" cy="156" r="4.5"/><circle class="s-card" cx="166" cy="156" r="4.5"/>
+            <circle class="s-ink" cx="140" cy="156" r="1.8"/><circle class="s-ink" cx="166" cy="156" r="1.8"/>
+            <circle class="s-card s-line" cx="134" cy="173" r="8"/><circle class="s-card s-line" cx="172" cy="173" r="8"/>
+            <path class="s-line" d="M153 142v-16"/>
+            <circle class="s-amber blink" cx="153" cy="121" r="6"/>
+            <circle class="s-card s-line" cx="74" cy="150" r="11"/><path class="s-line" d="M54 172q20-30 40 0"/>
+            <circle class="s-card s-line" cx="222" cy="150" r="11"/><path class="s-line" d="M202 172q20-30 40 0"/>
+          </svg>
+          <figcaption><span>Hands-on class at the bench</span><span>Lab session</span></figcaption>
+        </figure>
+
+        <!-- Scene B: arm station -->
+        <figure class="shot">
+          <svg viewBox="0 0 400 260" role="img" aria-label="Illustration of a robotic arm station reaching for a block, with its controller board">
+            <rect class="s-bg" width="400" height="260"/>
+            <path class="s-line" d="M0 206h400"/>
+            <rect class="s-card s-line" x="62" y="180" width="86" height="26" rx="4"/>
+            <path class="s-linebg" d="M105 178L160 80"/>
+            <path class="s-link" d="M105 178L160 80"/>
+            <g class="sway">
+              <path class="s-linebg" d="M160 80L250 148"/>
+              <path class="s-link" d="M160 80L250 148"/>
+              <path class="s-line" d="M250 150l-9 22M250 150l9 22"/>
+              <circle class="s-card s-line" cx="250" cy="148" r="8"/>
+            </g>
+            <circle class="s-card s-line" cx="105" cy="178" r="11"/><circle class="s-amber" cx="105" cy="178" r="4"/>
+            <circle class="s-card s-line" cx="160" cy="80" r="11"/><circle class="s-amber" cx="160" cy="80" r="4"/>
+            <rect class="s-amber" x="244" y="184" width="24" height="22" rx="2"/>
+            <text class="s-text" x="176" y="66">θ1 = 62°</text>
+            <text class="s-text" x="200" y="116">θ2 = −48°</text>
+            <path class="s-line" d="M148 196C190 232 280 232 306 196" stroke-dasharray="2 8"/>
+            <rect class="s-teal" x="300" y="150" width="72" height="56" rx="5"/>
+            <path class="s-line" d="M312 150v-8M324 150v-8M336 150v-8M348 150v-8M360 150v-8" />
+            <rect class="s-card s-line" x="314" y="166" width="24" height="24" rx="2"/>
+            <circle class="s-amber blink" cx="354" cy="170" r="5"/>
+            <circle class="s-card s-line" cx="354" cy="188" r="4"/>
+          </svg>
+          <figcaption><span>Robotic arm and controller</span><span>Build station</span></figcaption>
+        </figure>
+
+        <!-- Scene C: rover -->
+        <figure class="shot">
+          <svg viewBox="0 0 400 260" role="img" aria-label="Illustration of a wheeled rover with a spinning lidar sensor and a camera">
+            <rect class="s-bg" width="400" height="260"/>
+            <path class="s-line" d="M0 206h400"/>
+            <path class="ground" d="M0 234h400"/>
+            <rect class="s-teal" x="100" y="124" width="188" height="50" rx="14"/>
+            <rect class="s-card s-line" x="122" y="102" width="70" height="22" rx="4"/>
+            <path class="s-line" d="M240 124v-10"/>
+            <circle class="s-card s-line" cx="240" cy="104" r="11"/>
+            <path class="s-line sweep" d="M240 104V70"/>
+            <path class="s-line" d="M212 104a28 28 0 0156 0" stroke-dasharray="3 7"/>
+            <rect class="s-amber" x="286" y="134" width="14" height="18" rx="3"/>
+            <path class="s-line ping" d="M310 136q14 14 0 28"/>
+            <path class="s-line ping p2" d="M322 128q20 22 0 44"/>
+            <path class="s-line ping p3" d="M334 120q26 30 0 60"/>
+            <circle class="s-card s-line" cx="140" cy="180" r="24"/>
+            <g class="wheel w1"><path class="s-line" d="M140 160v40M120 180h40"/></g>
+            <circle class="s-amber" cx="140" cy="180" r="6"/>
+            <circle class="s-card s-line" cx="250" cy="180" r="24"/>
+            <g class="wheel w2"><path class="s-line" d="M250 160v40M230 180h40"/></g>
+            <circle class="s-amber" cx="250" cy="180" r="6"/>
+            <circle class="s-card s-line" cx="152" cy="146" r="4"/><circle class="s-card s-line" cx="172" cy="146" r="4"/>
+          </svg>
+          <figcaption><span>Autonomous rover project</span><span>Student build</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="projects">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Projects</span>
+        <h2>Things I have built and taught</h2>
+      </div>
+      <div class="proj">
+        <div class="panel" aria-label="Line follower robot simulation">
+          <div class="panel-head"><span>Line follower · 3-sensor array</span><span id="lfTurn">Straight</span></div>
+          <canvas id="lfCanvas" role="img" aria-label="A small robot following a figure-eight line"></canvas>
+          <div class="readout" style="grid-template-columns: repeat(3, minmax(0, 1fr));">
+            <div>Sensors<b id="lfSens">0 1 0</b></div>
+            <div>Mode<b>PID</b></div>
+            <div>Track<b>Figure 8</b></div>
+          </div>
+        </div>
+        <!-- EDIT: your projects -->
+        <div class="proj-list">
+          <article class="item">
+            <h3>Line follower robot <small>Arduino</small></h3>
+            <p>A three-sensor robot tuned with PID control. Students learn why a small change in gain makes it steady or wobbly.</p>
+            <div class="tags"><span class="tag">Arduino</span><span class="tag">IR sensors</span><span class="tag">PID</span></div>
+          </article>
+          <article class="item">
+            <h3>Two-joint robotic arm <small>Kinematics</small></h3>
+            <p>Servo arm that reaches a point using inverse kinematics, the same maths running in the hero panel above.</p>
+            <div class="tags"><span class="tag">Servos</span><span class="tag">Python</span><span class="tag">Kinematics</span></div>
+          </article>
+          <article class="item">
+            <h3>Vision object sorter <small>AI</small></h3>
+            <p>A camera identifies coloured blocks and a gripper places each one in the right bin.</p>
+            <div class="tags"><span class="tag">OpenCV</span><span class="tag">Raspberry Pi</span><span class="tag">Gripper</span></div>
+          </article>
+          <article class="item">
+            <h3>Classroom robotics kit <small>Teaching</small></h3>
+            <p>A low-cost kit and lesson plan that lets a class of 30 build their first moving robot in a day.</p>
+            <div class="tags"><span class="tag">Curriculum</span><span class="tag">3D printing</span><span class="tag">ESP32</span></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Skills</span>
+        <h2>Toolbox</h2>
+      </div>
+      <!-- EDIT: skill levels, set --v from 1 to 10 -->
+      <div class="skills">
+        <div class="skill"><div>Arduino &amp; ESP32<span>9 / 10</span></div><i class="gauge" style="--v:9"></i></div>
+        <div class="skill"><div>Python programming<span>9 / 10</span></div><i class="gauge" style="--v:9"></i></div>
+        <div class="skill"><div>Teaching &amp; curriculum design<span>10 / 10</span></div><i class="gauge" style="--v:10"></i></div>
+        <div class="skill"><div>Robot kinematics &amp; control<span>8 / 10</span></div><i class="gauge" style="--v:8"></i></div>
+        <div class="skill"><div>Computer vision (OpenCV)<span>8 / 10</span></div><i class="gauge" style="--v:8"></i></div>
+        <div class="skill"><div>Machine learning &amp; TinyML<span>7 / 10</span></div><i class="gauge" style="--v:7"></i></div>
+        <div class="skill"><div>ROS<span>7 / 10</span></div><i class="gauge" style="--v:7"></i></div>
+        <div class="skill"><div>CAD &amp; 3D printing<span>6 / 10</span></div><i class="gauge" style="--v:6"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="journey">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Journey</span>
+        <h2>How I got here</h2>
+      </div>
+      <!-- EDIT: years and roles -->
+      <ol class="path">
+        <li><time>20XX</time><h3>B.Tech</h3><p>Add your branch, college and what you built along the way.</p></li>
+        <li><time>20XX</time><h3>First robotics workshops</h3><p>Started teaching Arduino and sensors to school and college groups.</p></li>
+        <li><time>20XX</time><h3>Coding and AI trainer</h3><p>Expanded into Python, computer vision and machine learning programs.</p></li>
+        <li><time>Now</time><h3>Running lab programs</h3><p>Designing robotics curricula and training teams on hands-on projects.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <span class="eyebrow">Contact</span>
+        <h2>Let's build something that moves.</h2>
+        <p class="lead">Workshops, school programs, college training or a project you want help with. Write to me and I will reply within a day or two.</p>
+        <!-- EDIT: your email, phone and links -->
+        <div class="mail">
+          <code id="emailText">yourname@example.com</code>
+          <button class="btn" id="copyBtn" type="button">Copy email</button>
+        </div>
+        <div class="mono" style="color: var(--muted); font-size: 0.9rem;">Phone: +91 00000 00000 · City, India</div>
+        <div class="links">
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 G. Raghu Ram</span><span>Coding · Robotics · AI</span></div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cv(n) { return getComputedStyle(root).getPropertyValue(n).trim(); }
+
+  /* theme toggle */
+  try {
+    var saved = localStorage.getItem('grr-theme');
+    if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  } catch (e) {}
+  function isDark() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  document.getElementById('themeBtn').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('grr-theme', next); } catch (e) {}
+    drawAll(performance.now());
+  });
+
+  /* copy email */
+  var copyBtn = document.getElementById('copyBtn');
+  var emailEl = document.getElementById('emailText');
+  copyBtn.addEventListener('click', function () {
+    var txt = emailEl.textContent.trim();
+    function done(msg) { copyBtn.textContent = msg; setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 1800); }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(emailEl);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      done('Selected, press Ctrl+C');
+    }
+    try { navigator.clipboard.writeText(txt).then(function () { done('Copied'); }, fallback); } catch (e) { fallback(); }
+  });
+
+  /* canvas helpers */
+  function setup(canvas) {
+    var r = canvas.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.max(1, Math.round(r.width * dpr));
+    canvas.height = Math.max(1, Math.round(r.height * dpr));
+    return { w: r.width, h: r.height, dpr: dpr };
+  }
+  function rr(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + w, y, x + w, y + h, r);
+    ctx.arcTo(x + w, y + h, x, y + h, r);
+    ctx.arcTo(x, y + h, x, y, r);
+    ctx.arcTo(x, y, x + w, y, r);
+    ctx.closePath();
+  }
+  function gridLines(ctx, w, h, step, color) {
+    ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.beginPath();
+    for (var x = 0; x <= w; x += step) { ctx.moveTo(x + 0.5, 0); ctx.lineTo(x + 0.5, h); }
+    for (var y = 0; y <= h; y += step) { ctx.moveTo(0, y + 0.5); ctx.lineTo(w, y + 0.5); }
+    ctx.stroke();
+  }
+
+  /* ---------- hero: 2-joint arm with inverse kinematics ---------- */
+  var ac = document.getElementById('armCanvas');
+  var actx = ac.getContext('2d');
+  var A = setup(ac);
+  var ptr = null, lastPtr = 0, cur = null, frame = 0;
+  var rd = { t1: document.getElementById('rdT1'), t2: document.getElementById('rdT2'), x: document.getElementById('rdX'), y: document.getElementById('rdY') };
+
+  ac.addEventListener('pointermove', function (e) {
+    var r = ac.getBoundingClientRect();
+    ptr = { x: e.clientX - r.left, y: e.clientY - r.top };
+    lastPtr = performance.now();
+  });
+  ac.addEventListener('pointerleave', function () { lastPtr = 0; });
+
+  function drawArm(t) {
+    var w = A.w, h = A.h, ctx = actx;
+    ctx.setTransform(A.dpr, 0, 0, A.dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    var fg = cv('--fg'), muted = cv('--muted'), grid = cv('--grid'), card = cv('--card');
+    var amber = cv('--amber-fill'), teal = cv('--teal-fill');
+
+    gridLines(ctx, w, h, 24, grid);
+
+    var bx = w * 0.5, by = h * 0.88, L1 = w * 0.28, L2 = w * 0.24, R = L1 + L2;
+    var usePtr = ptr && (performance.now() - lastPtr < 2500);
+    var gx, gy;
+    if (usePtr) { gx = ptr.x; gy = ptr.y; }
+    else { gx = bx + Math.sin(t * 0.0006) * R * 0.75; gy = by - R * (0.5 + 0.32 * Math.sin(t * 0.0009 + 1.2)); }
+    if (!cur) cur = { x: gx, y: gy };
+    cur.x += (gx - cur.x) * 0.1; cur.y += (gy - cur.y) * 0.1;
+
+    var dx = cur.x - bx, dy = by - cur.y;
+    var d = Math.max(Math.hypot(dx, dy), 0.001);
+    var dc = Math.min(Math.max(d, Math.abs(L1 - L2) + 1), R - 1);
+    var tx = dx * dc / d, ty = dy * dc / d;
+    var c2 = (dc * dc - L1 * L1 - L2 * L2) / (2 * L1 * L2);
+    c2 = Math.max(-1, Math.min(1, c2));
+    var th2 = -Math.acos(c2);
+    var th1 = Math.atan2(ty, tx) - Math.atan2(L2 * Math.sin(th2), L1 + L2 * Math.cos(th2));
+    var ex = bx + L1 * Math.cos(th1), ey = by - L1 * Math.sin(th1);
+    var phi = th1 + th2;
+    var wx = ex + L2 * Math.cos(phi), wy = ey - L2 * Math.sin(phi);
+
+    /* reach envelope */
+    ctx.setLineDash([4, 7]); ctx.strokeStyle = muted; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(bx, by, R, Math.PI, 2 * Math.PI); ctx.stroke();
+    ctx.setLineDash([]);
+
+    /* base */
+    ctx.fillStyle = card; ctx.strokeStyle = fg; ctx.lineWidth = 3;
+    rr(ctx, bx - 38, by + 2, 76, 18, 4); ctx.fill(); ctx.stroke();
+
+    /* joint angle arcs */
+    ctx.strokeStyle = amber; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(bx, by, 34, -th1, 0); ctx.stroke();
+    ctx.beginPath(); ctx.arc(ex, ey, 26, -th1, -phi, false); ctx.stroke();
+
+    /* links */
+    function link(x1, y1, x2, y2, outer, inner) {
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = fg; ctx.lineWidth = outer;
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+      ctx.strokeStyle = teal; ctx.lineWidth = inner;
+      ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
+    }
+    link(bx, by, ex, ey, 20, 14);
+    link(ex, ey, wx, wy, 16, 10);
+
+    /* gripper */
+    var fx = Math.cos(phi), fy = -Math.sin(phi), px = -fy, py = fx;
+    ctx.strokeStyle = fg; ctx.lineWidth = 5; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(wx + px * 10, wy + py * 10);
+    ctx.lineTo(wx + px * 10 + fx * 18, wy + py * 10 + fy * 18);
+    ctx.lineTo(wx + px * 5 + fx * 24, wy + py * 5 + fy * 24);
+    ctx.moveTo(wx - px * 10, wy - py * 10);
+    ctx.lineTo(wx - px * 10 + fx * 18, wy - py * 10 + fy * 18);
+    ctx.lineTo(wx - px * 5 + fx * 24, wy - py * 5 + fy * 24);
+    ctx.stroke();
+    ctx.strokeStyle = amber; ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    ctx.moveTo(wx + px * 10, wy + py * 10);
+    ctx.lineTo(wx + px * 10 + fx * 18, wy + py * 10 + fy * 18);
+    ctx.lineTo(wx + px * 5 + fx * 24, wy + py * 5 + fy * 24);
+    ctx.moveTo(wx - px * 10, wy - py * 10);
+    ctx.lineTo(wx - px * 10 + fx * 18, wy - py * 10 + fy * 18);
+    ctx.lineTo(wx - px * 5 + fx * 24, wy - py * 5 + fy * 24);
+    ctx.stroke();
+
+    /* joints */
+    [[bx, by, 13], [ex, ey, 11], [wx, wy, 8]].forEach(function (j) {
+      ctx.fillStyle = card; ctx.strokeStyle = fg; ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(j[0], j[1], j[2], 0, 6.2832); ctx.fill(); ctx.stroke();
+      ctx.fillStyle = amber; ctx.beginPath(); ctx.arc(j[0], j[1], j[2] * 0.38, 0, 6.2832); ctx.fill();
+    });
+
+    /* target */
+    ctx.strokeStyle = amber; ctx.lineWidth = 1.5; ctx.setLineDash([3, 4]);
+    ctx.beginPath(); ctx.arc(gx, gy, 12, 0, 6.2832); ctx.stroke(); ctx.setLineDash([]);
+    ctx.beginPath(); ctx.moveTo(gx - 18, gy); ctx.lineTo(gx - 6, gy); ctx.moveTo(gx + 6, gy); ctx.lineTo(gx + 18, gy);
+    ctx.moveTo(gx, gy - 18); ctx.lineTo(gx, gy - 6); ctx.moveTo(gx, gy + 6); ctx.lineTo(gx, gy + 18); ctx.stroke();
+
+    frame++;
+    if (frame % 4 === 0) {
+      rd.t1.textContent = Math.round(th1 * 180 / Math.PI) + '°';
+      rd.t2.textContent = Math.round(th2 * 180 / Math.PI) + '°';
+      rd.x.textContent = Math.round((wx - bx) / w * 400);
+      rd.y.textContent = Math.round((by - wy) / w * 400);
+    }
+  }
+
+  /* ---------- projects: line follower on a figure-eight ---------- */
+  var lc = document.getElementById('lfCanvas');
+  var lctx = lc.getContext('2d');
+  var LF = setup(lc);
+  var trail = [], lfFrame = 0, lastSens = '';
+  var lfSens = document.getElementById('lfSens'), lfTurn = document.getElementById('lfTurn');
+
+  function pt(u, w, h) { return { x: w / 2 + w * 0.34 * Math.sin(u), y: h / 2 + h * 0.30 * Math.sin(2 * u) }; }
+  function heading(u, w, h) { var p = pt(u, w, h), q = pt(u + 0.02, w, h); return Math.atan2(q.y - p.y, q.x - p.x); }
+
+  function drawLF(t) {
+    var w = LF.w, h = LF.h, ctx = lctx;
+    ctx.setTransform(LF.dpr, 0, 0, LF.dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+    var fg = cv('--fg'), grid = cv('--grid'), card = cv('--card'), amber = cv('--amber-fill'), teal = cv('--teal-fill');
+    gridLines(ctx, w, h, 24, grid);
+
+    /* track */
+    ctx.strokeStyle = fg; ctx.globalAlpha = 0.85; ctx.lineWidth = 9; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath();
+    for (var i = 0; i <= 240; i++) {
+      var p0 = pt(i / 240 * 6.2832, w, h);
+      if (i === 0) ctx.moveTo(p0.x, p0.y); else ctx.lineTo(p0.x, p0.y);
+    }
+    ctx.stroke(); ctx.globalAlpha = 1;
+
+    var u = t * 0.00042 + 0.8;
+    var p = pt(u, w, h), hd = heading(u, w, h);
+    trail.push({ x: p.x, y: p.y });
+    if (trail.length > 70) trail.shift();
+    for (var k = 0; k < trail.length; k++) {
+      ctx.globalAlpha = k / trail.length * 0.55;
+      ctx.fillStyle = amber;
+      ctx.beginPath(); ctx.arc(trail[k].x, trail[k].y, 2.4, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    var s = Math.max(0.8, w / 460);
+    ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(hd); ctx.scale(s, s);
+    ctx.fillStyle = fg;
+    ctx.fillRect(-10, -17, 15, 6); ctx.fillRect(-10, 11, 15, 6);
+    ctx.fillStyle = teal; ctx.strokeStyle = fg; ctx.lineWidth = 2.5;
+    rr(ctx, -16, -11, 34, 22, 5); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = card; ctx.beginPath(); ctx.arc(-4, 0, 4, 0, 6.2832); ctx.fill();
+    ctx.fillStyle = amber;
+    [-7, 0, 7].forEach(function (yy) { ctx.beginPath(); ctx.arc(22, yy, 2.4, 0, 6.2832); ctx.fill(); });
+    ctx.restore();
+
+    lfFrame++;
+    if (lfFrame % 6 === 0) {
+      var dh = heading(u + 0.14, w, h) - hd;
+      while (dh > Math.PI) dh -= 6.2832;
+      while (dh < -Math.PI) dh += 6.2832;
+      var sens = '0 1 0', turn = 'Straight';
+      if (dh > 0.07) { sens = '0 1 1'; turn = 'Turn right'; }
+      else if (dh < -0.07) { sens = '1 1 0'; turn = 'Turn left'; }
+      if (sens !== lastSens) { lastSens = sens; lfSens.textContent = sens; lfTurn.textContent = turn; }
+    }
+  }
+
+  /* loop, only while a canvas is on screen */
+  var vis = { arm: true, lf: false };
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.target === ac) vis.arm = e.isIntersecting; else vis.lf = e.isIntersecting; });
+    });
+    io.observe(ac); io.observe(lc);
+  }
+  function drawAll(t) { drawArm(t); drawLF(t); }
+  function loop(t) {
+    if (vis.arm) drawArm(t);
+    if (vis.lf) drawLF(t);
+    requestAnimationFrame(loop);
+  }
+  function resize() { A = setup(ac); LF = setup(lc); drawAll(reduce ? 0 : performance.now()); }
+  if ('ResizeObserver' in window) { new ResizeObserver(resize).observe(ac); } else { window.addEventListener('resize', resize); }
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () { drawAll(performance.now()); });
+
+  drawAll(reduce ? 0 : 0);
+  if (reduce) {
+    ac.addEventListener('pointermove', function () { for (var i = 0; i < 12; i++) drawArm(0); });
+  } else {
+    requestAnimationFrame(loop);
+  }
+})();
+</script>
+
+</body></html>
